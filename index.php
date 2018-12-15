@@ -189,60 +189,60 @@
             <ul class="playlist">
             <?php         
               // Gán hàm addslashes để chống sql injection
-              $timkiem = addslashes($_POST['timkiem']);
+                $timkiem = addslashes($_POST['timkiem']);
 
-              // Nếu $timkiem rỗng thì báo lỗi, tức là người dùng chưa nhập liệu mà đã nhấn submit.
-              if (empty($timkiem)) 
-              {
-                echo "<p style= 'color:red;'>* Dữ liệu tìm kiếm không được để trống</p>";
-              } 
-              else
-              {
-                // Dùng câu lênh like trong sql và sứ dụng toán tử % của php để tìm kiếm dữ liệu chính xác hơn.
-                $sql = "SELECT * FROM baihat WHERE tenbh LIKE '%$timkiem%' OR tencs LIKE '%$timkiem%' OR tenns LIKE '%$timkiem%' OR quocgia LIKE '%$timkiem%' OR theloai LIKE '%$timkiem%' ";
-
-                // Kết nối sql
-                require("config/connect.php");
-                mysqli_set_charset($conn, 'UTF8');
-                // Thực thi câu truy vấn
-                $kq = mysqli_query($conn,$sql);
-
-                // Đếm số dòng trả về trong sql.
-                $num = mysqli_num_rows($kq);
-
-                // Nếu có kết quả thì hiển thị, ngược lại thì thông báo không tìm thấy kết quả
-                if ($num > 0 && $timkiem != "") 
+                // Nếu $timkiem rỗng thì báo lỗi, tức là người dùng chưa nhập liệu mà đã nhấn submit.
+                if (empty($timkiem)) 
                 {
-                  // Dùng $num để đếm số dòng trả về.
-                  echo "<p style='color:#FF6633;'>$num kết quả trả về với từ khóa <b>$timkiem</b></p>";
-                  $dem=1;
-                  while ($data = mysqli_fetch_assoc($kq))
-                  {
-                    $data['url']="../".$data['url'];
-                    $data['img']="../".$data['img'];
-                    echo"<li audiourl='$data[url]' cover='$data[img]' artist='$data[tenbh]'>";
-                      echo"<div class='bai-hat-tuan'>";
-
-                        echo"<div class='number'>$dem</div>";
-                        echo"<div class='info'>";
-                          echo"<div><a id='id-name' href='#'>$data[tenbh]</a></div>";
-                          echo"<div class='singer'><a id='id-singer' href='#'>$data[tencs]</a></div>";
-                        echo"</div>";
-                        echo"<div class='view-count'>12</div> ";          
-
-                      echo"</div>";
-                    echo"</li>";
-                    $dem++;
-                  }
-                }                 
-                else 
-                {
-                  echo"<p style='color:red;'>* Không tìm thấy kết quả!;</p>";
+                  echo "<p style= 'color:red;'>* Dữ liệu tìm kiếm không được để trống</p>";
                 } 
+                else
+                {
+                  // Dùng câu lênh like trong sql và sứ dụng toán tử % của php để tìm kiếm dữ liệu chính xác hơn.
+                  $sql = "SELECT * FROM baihat WHERE tenbh LIKE '%$timkiem%' OR tencs LIKE '%$timkiem%' OR tenns LIKE '%$timkiem%' OR quocgia LIKE '%$timkiem%' OR theloai LIKE '%$timkiem%' ";
 
-                //Đóng kết nối với CSDL
-                mysqli_close($conn);
-              }
+                  // Kết nối sql
+                  require("config/connect.php");
+                  mysqli_set_charset($conn, 'UTF8');
+                  // Thực thi câu truy vấn
+                  $kq = mysqli_query($conn,$sql);
+
+                  // Đếm số dòng trả về trong sql.
+                  $num = mysqli_num_rows($kq);
+
+                  // Nếu có kết quả thì hiển thị, ngược lại thì thông báo không tìm thấy kết quả
+                  if ($num > 0 && $timkiem != "") 
+                  {
+                    // Dùng $num để đếm số dòng trả về.
+                    echo "<p style='color:#FF6633;'>$num kết quả trả về với từ khóa <b>$timkiem</b></p>";
+                    $dem=1;
+                    while ($data = mysqli_fetch_assoc($kq))
+                    {
+                      $data['url']="../".$data['url'];
+                      $data['img']="../".$data['img'];
+                      echo"<li audiourl='$data[url]' cover='$data[img]' artist='$data[tenbh]'>";
+                        echo"<div class='bai-hat-tuan'>";
+
+                          echo"<div class='number'>$dem</div>";
+                          echo"<div class='info'>";
+                            echo"<div><a id='id-name' href='#'>$data[tenbh]</a></div>";
+                            echo"<div class='singer'><a id='id-singer' href='#'>$data[tencs]</a></div>";
+                          echo"</div>";
+                          echo"<div class='view-count'>12</div> ";          
+
+                        echo"</div>";
+                      echo"</li>";
+                      $dem++;
+                    }
+                  }                 
+                  else 
+                  {
+                    echo"<p style='color:red;'>* Không tìm thấy kết quả!;</p>";
+                  } 
+
+                  //Đóng kết nối với CSDL
+                  mysqli_close($conn);
+                }
         ?> 
                </ul>
             <div class="force-overflow"></div>
@@ -260,7 +260,7 @@
           
 
           }
- 
+
 
           else
           {
@@ -330,7 +330,7 @@
                       echo"<div class='box'>";
                         echo"<div class='avatar'>";
                           echo"<div class='overload'>";
-                            echo"<a href='mylist.p<a href='music.php?mabh= $data[mabh]'><img src='$data[img]' style='width: 140px;height: 130px;'></a>";
+                            echo"<a href='music.php?mabh= $data[mabh]'><img src='$data[img]' style='width: 140px;height: 130px;'></a>";
                             echo"<span><i class=' fab fa-google-play fa-2x'></i></span>";
                           echo"</div>";
                         echo"</div>";
@@ -363,15 +363,15 @@
             <?php  
               require("config/connect.php");
             
-              $sql = "SELECT topten, tenbh, tencs FROM baihat WHERE topten >0 AND topten <11 ORDER BY topten";
+              $sql = "SELECT mabh, topten, tenbh, tencs FROM baihat WHERE topten >0 AND topten <11 ORDER BY topten";
               $kq = mysqli_query($conn,$sql);
               while ($data = mysqli_fetch_assoc($kq))
               {
                 echo"<div class='bai-hat-tuan'>";
                   echo"<div class='number'>$data[topten]</div>";
                   echo"<div class='info'>";
-                    echo"<div class='title'><a id='id-name' href='#'>$data[tenbh]</a></div>";
-                    echo"<div class='singer mb-2'><a id='id-singer' href='#'>$data[tencs]</a></div>";
+                    echo"<div class='title'><a id='id-name' href='music.php?mabh= $data[mabh]'>$data[tenbh]</a></div>";
+                    echo"<div class='singer mb-2'><a id='id-singer' href='music.php?mabh= $data[mabh]'>$data[tencs]</a></div>";
                   echo"</div>";
                 echo"</div>";
               }
