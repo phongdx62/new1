@@ -159,7 +159,9 @@
                         $dem=1;
                         while ($data = mysqli_fetch_assoc($kq))
                         {
-                          echo"<li audiourl='$data[url]' cover='./slider.jpg' artist='$data[tenbh]'>";
+                          $data['url']="../".$data['url'];
+                          $data['img']="../".$data['img'];
+                          echo"<li audiourl='$data[url]' cover='$data[img]' artist='$data[tenbh]'>";
                             echo"<div class='bai-hat-tuan'>";
 
                               echo"<div class='number'>$dem</div>";
